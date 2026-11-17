@@ -1,10 +1,12 @@
 const express = require("express");
+const connectedDB = require("./config/db");
 
 const app = express();
 const PORT = process.env.port || 5000;
 
 const startServer = () => {
   try {
+    connectedDB();
     app.listen(PORT, () => {
       console.log(`the server is listening in https://localhost:${PORT}`);
     });
