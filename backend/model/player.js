@@ -5,6 +5,13 @@ const playerSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date.now(),
+  },
 });
 
-module.exports = playerSchema;
+module.exports = mongoose.model("player", playerSchema);
