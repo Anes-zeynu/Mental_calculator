@@ -22,8 +22,8 @@ const registerPlayer = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newPlayer = await player.create({
-      name: playerName,
-      email,
+      name: playerName.trim(),
+      email: email.toLowercase().trim(),
       password: hashedPassword,
     });
   } catch (error) {
