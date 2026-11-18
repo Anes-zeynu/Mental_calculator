@@ -72,6 +72,15 @@ const loginPlayer = async (req, res) => {
         message: "invalid email or password",
       });
     }
+
+    return res.status(200).json({
+      message: "Login successful",
+      player: {
+        id: existingPlayer._id,
+        playerName: existingPlayer.playerName,
+        email: existingPlayer.email,
+      },
+    });
   } catch (error) {
     return res.status(500).json({
       message: "failed to login",
