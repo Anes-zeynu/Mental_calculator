@@ -43,4 +43,5 @@ const registerPlayer = async (req, res) => {
   }
 };
 
-module.exports = { registerPlayer };
+const loginPlayer = async (req, res) => {};
+module.exports = { registerPlayer, loginPlayer };
