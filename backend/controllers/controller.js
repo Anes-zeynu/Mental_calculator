@@ -82,6 +82,7 @@ const loginPlayer = async (req, res) => {
     );
     return res.status(200).json({
       message: "Login successful",
+      token,
       player: {
         id: existingPlayer._id,
         playerName: existingPlayer.playerName,
