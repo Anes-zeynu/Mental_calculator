@@ -42,3 +42,5 @@ const registerPlayer = async (req, res) => {
     });
   }
 };
+
+module.exports = { registerPlayer };
