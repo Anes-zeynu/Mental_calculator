@@ -10,7 +10,7 @@ const registerPlayer = async (req, res) => {
         .json({ message: "Invalid , all are required field" });
     }
     const existingPlayer = await player.findOne({
-      email: email.toLowerCase().trim(),
+      email,
     });
 
     if (existingPlayer) {
@@ -36,7 +36,7 @@ const registerPlayer = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "Error in registration player",
       error: error.message,
     });
@@ -48,7 +48,7 @@ const loginPlayer = async (req, res) => {
     const { email, password } = req.body;
     const isPasswordValid = await bcrypt.compare(password, hashedPassword);
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "failed to login",
       error: error.message,
     });
