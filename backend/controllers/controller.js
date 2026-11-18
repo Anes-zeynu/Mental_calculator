@@ -22,12 +22,12 @@ const registerPlayer = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newPlayer = await player.create({
-      playerName,
+      playerName: playerName.trim(),
       email: email.toLowerCase().trim(),
       password: hashedPassword,
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "player regisered successfully",
       player: {
         id: newPlayer._id,
@@ -46,6 +46,12 @@ const registerPlayer = async (req, res) => {
 const loginPlayer = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "both email and passwords are required",
+      });
+    }
     const isPasswordValid = await bcrypt.compare(password, hashedPassword);
   } catch (error) {
     return res.status(500).json({
