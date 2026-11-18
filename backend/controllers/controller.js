@@ -12,6 +12,14 @@ const registerPlayer = async (req, res) => {
     const existingPlayer = await player.findOne({
       email: email.toLowercase().trim(),
     });
+
+    if (existingPlayer) {
+      return res.status(409).json({
+        message: "Email already registered",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
   } catch (error) {
     console.log("Error in adding player", error.message);
   }
