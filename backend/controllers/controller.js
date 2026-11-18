@@ -53,7 +53,7 @@ const loginPlayer = async (req, res) => {
       });
     }
 
-    const existingPlayer = player.findOne({
+    const existingPlayer = await player.findOne({
       email: email.toLowerCase().trim(),
     });
 
