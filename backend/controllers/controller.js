@@ -78,6 +78,7 @@ const loginPlayer = async (req, res) => {
         id: existingPlayer._id,
       },
       process.env.JWT_token,
+      { expiresIn: process.env.expires || "1d" },
     );
     return res.status(200).json({
       message: "Login successful",
