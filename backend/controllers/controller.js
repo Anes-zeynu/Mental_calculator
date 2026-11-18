@@ -26,6 +26,15 @@ const registerPlayer = async (req, res) => {
       email: email.toLowercase().trim(),
       password: hashedPassword,
     });
+
+    res.status(201).json({
+      message: "player regisered successfully",
+      player: {
+        id: newPlayer._id,
+        name: newPlayer.playerName,
+        email: newPlayer.email,
+      },
+    });
   } catch (error) {
     res.status(500).json({
       message: "Error in registration player",
