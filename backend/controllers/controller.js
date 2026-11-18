@@ -9,6 +9,9 @@ const registerPlayer = async (req, res) => {
         .status(400)
         .json({ message: "Invalid , all are required field" });
     }
+    const existingPlayer = await player.findOne({
+      email: email.toLowercase().trim(),
+    });
   } catch (error) {
     console.log("Error in adding player", error.message);
   }
