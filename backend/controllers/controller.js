@@ -56,7 +56,22 @@ const loginPlayer = async (req, res) => {
     const existingPlayer = player.findOne({
       email: email.toLowerCase().trim(),
     });
-    const isPasswordValid = await bcrypt.compare(password, hashedPassword);
+
+    if (!existingPlayer) {
+      return res.status(401).json({
+        message: "invalid email or password",
+      });
+    }
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      existingPlayer.password,
+    );
+
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        message: "invalid email or password",
+      });
+    }
   } catch (error) {
     return res.status(500).json({
       message: "failed to login",
