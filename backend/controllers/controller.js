@@ -3,14 +3,14 @@ const bcrypt = require("bcryptjs");
 
 const registerPlayer = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    if (!name || !email || !password) {
+    const { playerName, email, password } = req.body;
+    if (!playerName || !email || !password) {
       return res
         .status(400)
         .json({ message: "Invalid , all are required field" });
     }
     const existingPlayer = await player.findOne({
-      email: email.toLowercase().trim(),
+      email: email.toLowerCase().trim(),
     });
 
     if (existingPlayer) {
@@ -22,8 +22,8 @@ const registerPlayer = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newPlayer = await player.create({
-      name: playerName.trim(),
-      email: email.toLowercase().trim(),
+      playerName,
+      email: email.toLowerCase().trim(),
       password: hashedPassword,
     });
 
@@ -45,7 +45,8 @@ const registerPlayer = async (req, res) => {
 
 const loginPlayer = async (req, res) => {
   try {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
+    const isPasswordValid = await bcrypt.compare(password, hashedPassword);
   } catch (error) {
     res.status(500).json({
       message: "failed to login",

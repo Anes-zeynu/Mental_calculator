@@ -4,6 +4,7 @@ const playerSchema = mongoose.Schema({
   playerName: {
     type: String,
     required: true,
+    trim: true,
   },
   email: {
     type: String,
