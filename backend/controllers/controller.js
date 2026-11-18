@@ -43,5 +43,14 @@ const registerPlayer = async (req, res) => {
   }
 };
 
-const loginPlayer = async (req, res) => {};
+const loginPlayer = async (req, res) => {
+  try {
+    const { name, password } = req.body;
+  } catch (error) {
+    res.status(500).json({
+      message: "failed to login",
+      error: error.message,
+    });
+  }
+};
 module.exports = { registerPlayer, loginPlayer };
