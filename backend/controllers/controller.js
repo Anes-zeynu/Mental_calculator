@@ -52,6 +52,10 @@ const loginPlayer = async (req, res) => {
         message: "both email and passwords are required",
       });
     }
+
+    const existingPlayer = player.findOne({
+      email: email.toLowerCase().trim(),
+    });
     const isPasswordValid = await bcrypt.compare(password, hashedPassword);
   } catch (error) {
     return res.status(500).json({
