@@ -1,7 +1,6 @@
+const jwt = require("jsonwebtoken");
 const player = require("../model/player");
 const bcrypt = require("bcryptjs");
-
-const jwt = require("jsonwebtoken");
 const registerPlayer = async (req, res) => {
   try {
     const { playerName, email, password } = req.body;
@@ -74,6 +73,12 @@ const loginPlayer = async (req, res) => {
       });
     }
 
+    const token = jwt.sign(
+      {
+        id: existingPlayer._id,
+      },
+      process.env.JWT_token,
+    );
     return res.status(200).json({
       message: "Login successful",
       player: {
