@@ -31,7 +31,7 @@ const registerPlayer = async (req, res) => {
       message: "player regisered successfully",
       player: {
         id: newPlayer._id,
-        name: newPlayer.playerName,
+        playerName: newPlayer.playerName,
         email: newPlayer.email,
       },
     });
