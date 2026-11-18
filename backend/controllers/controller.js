@@ -20,7 +20,16 @@ const registerPlayer = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newPlayer = await player.create({
+      name: playerName,
+      email,
+      password: hashedPassword,
+    });
   } catch (error) {
-    console.log("Error in adding player", error.message);
+    res.status(500).json({
+      message: "Error in registration player",
+      error: error.message,
+    });
   }
 };
