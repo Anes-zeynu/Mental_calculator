@@ -1,6 +1,7 @@
 const player = require("../model/player");
 const bcrypt = require("bcryptjs");
 
+const jwt = require("jsonwebtoken");
 const registerPlayer = async (req, res) => {
   try {
     const { playerName, email, password } = req.body;
